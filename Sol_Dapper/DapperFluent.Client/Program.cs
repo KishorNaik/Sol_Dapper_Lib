@@ -11,12 +11,12 @@ namespace DapperFluent.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
+           
                 Task.Run(async () => {
 
                     try
                     {
+                        // Create an instance of user Model Class and bind data.
                         var userModelObj = new UserModel()
                         {
                             FirstName = "Kishor",
