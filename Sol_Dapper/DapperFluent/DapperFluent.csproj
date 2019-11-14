@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Kishor Naik</Authors>
+    <PackageProjectUrl>https://github.com/KishorNaik/Sol_Dapper_Lib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/KishorNaik/Sol_Dapper_Lib</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

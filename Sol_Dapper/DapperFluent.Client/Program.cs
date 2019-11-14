@@ -19,22 +19,20 @@ namespace DapperFluent.Client
                     {
                         var userModelObj = new UserModel()
                         {
-                            FirstName = "Sam",
+                            FirstName = "Kishor",
                             LastName = "Naik"
                         };
 
-                        Stopwatch stopwatch = new Stopwatch();
-
-                        stopwatch.Start();
-
+                        // Usages of Dapper Fluent Api.
                         IDapperBuilder dapperBuilder = new DapperBuilder();
+
                         int? flag =
                                await
                                dapperBuilder
-                              ?.SqlOpenConnectionAsync(new SqlConnection(@"Data Source=DESKTOP-MOL1H66\IDEATORS;Initial Catalog=Ideators;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+                              ?.SqlOpenConnectionAsync(new SqlConnection("Connection String")) // Define any Database Provider
                               ?.SqlParameter(() =>
                               {
-
+                                  // Define Sql Parameter by using Dapper DynamicParameter Class
                                   var dynamicParameter = new DynamicParameters();
                                   dynamicParameter.Add("@FirstName", userModelObj?.FirstName , DbType.String, ParameterDirection.Input);
                                   dynamicParameter.Add("@LastName", userModelObj.LastName, DbType.String, ParameterDirection.Input);
@@ -44,6 +42,7 @@ namespace DapperFluent.Client
                               })
                               ?.SqlCommandAsync<int?>(async (leDbConnection, leDynamicParameter) =>
                               {
+                                  // Define custom query operation as per your requirement by using dapper IDbConnection list of extension methods.
 
                                   int? result =  
                                     await
@@ -53,16 +52,13 @@ namespace DapperFluent.Client
                                   return result;
 
                               })
-                              ?.ResultAsync<int?>();
+                              ?.ResultAsync<int?>(); // Get Result
 
                         Console.WriteLine((flag >= 1) ? "Data successfully save." : "something went wrong");
-                        stopwatch.Stop();
-
-                        Console.WriteLine(stopwatch.Elapsed.TotalSeconds);
+                       
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Hello");
                         Console.WriteLine(ex.Message);
                         Console.WriteLine(ex.StackTrace);
                     }
