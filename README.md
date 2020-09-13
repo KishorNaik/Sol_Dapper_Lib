@@ -1,5 +1,5 @@
 # Simple Dapper Fluent Api
-[![Generic badge](https://img.shields.io/badge/Nuget-1.0.0-<COLOR>.svg)](https://www.nuget.org/packages/HashPassword/)
+[![Generic badge](https://img.shields.io/badge/Nuget-1.0.0-<COLOR>.svg)](https://www.nuget.org/packages/DapperFluent/1.0.1)
 
 ## Simple fluent api by using existing dapper's api.
 
