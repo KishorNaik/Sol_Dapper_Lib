@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace DapperFluent_MultipleDbProvider_Api
+namespace DapperFluent_Api
 {
     public class Startup
     {

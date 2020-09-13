@@ -6,6 +6,8 @@
 		<Authors>Kishor Naik</Authors>
 		<PackageProjectUrl>https://github.com/KishorNaik/Sol_Dapper_Lib</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/KishorNaik/Sol_Dapper_Lib</RepositoryUrl>
+		<Version>1.0.1</Version>
+		<Description>Simple fluent api by using existing dapper's api.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
