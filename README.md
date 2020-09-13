@@ -5,33 +5,26 @@
 
 ### Using Nuget Package Manger:
 ```
-PM> Install-Package Dapper -Version 2.0.30
-PM> Install-Package DapperFluent -Version 1.0.0
+PM> Install-Package DapperFluent -Version 1.0.1
 ```
 
 ### Using .Net CLI:
 ```
-> dotnet add package Dapper --version 2.0.30
-> dotnet add package DapperFluent --version 1.0.0
+> dotnet add package DapperFluent --version 1.0.1
 ```
 
 ### Usage.
 
 ### Make model class
 ```C#
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DapperFluent.Client
-{
-    public class UserModel
+ public class ProductModel
     {
-        public String FirstName { get; set; }
+        public decimal? ProductId { get; set; }
 
-        public String LastName { get; set; }
+        public String Name { get; set; }
+
+        public Decimal? UnitPrice { get; set; }
     }
-}
 
 ```
 
@@ -43,70 +36,115 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dapper;
 using System.Diagnostics;
+using DapperFluent.Helpers;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace DapperFluent.Client
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
-           
-                Task.Run(async () => {
+            try
+            {
+                String connectionString = @"ConnectionString";
 
-                    try
-                    {
-                        // Create an instance of user Model Class and bind data.
-                        var userModelObj = new UserModel()
+                // Usages of Dapper Fluent Api.
+                IDapperBuilder dapperBuilder = new DapperBuilder();
+
+                var productModel = new ProductModel()
+                {
+                    Name = "Chai",
+                    UnitPrice = 100
+                };
+
+                //// Add Product
+                var flag =
+                       await
+                        dapperBuilder
+                        .OpenConnection(new SqlConnection(connectionString))  // Define any Database Provider
+                        .Parameter(() =>
                         {
-                            FirstName = "Kishor",
-                            LastName = "Naik"
-                        };
+                            var dyanmicParameter = new DynamicParameters();
+                            dyanmicParameter.Add("@Name", productModel.Name, DbType.String, ParameterDirection.Input);
+                            dyanmicParameter.Add("@UnitPrice", productModel.UnitPrice, DbType.Decimal, ParameterDirection.Input);
 
-                        // Usages of Dapper Fluent Api.
-                        IDapperBuilder dapperBuilder = new DapperBuilder();
+                            return dyanmicParameter;
+                        })
+                        .Command(async (dbConnection, dynamicParameter) =>
+                        {
+                            var addCommand = "INSERT INTO tblProducts (Name,UnitPrice) VALUES (@Name,@UnitPrice)";
 
-                        int? flag =
-                               await
-                               dapperBuilder
-                              ?.SqlOpenConnectionAsync(new SqlConnection("Connection String")) // Define any Database Provider
-                              ?.SqlParameter(() =>
-                              {
-                                  // Define Sql Parameter by using Dapper DynamicParameter Class
-                                  var dynamicParameter = new DynamicParameters();
-                                  dynamicParameter.Add("@FirstName", userModelObj?.FirstName , DbType.String, ParameterDirection.Input);
-                                  dynamicParameter.Add("@LastName", userModelObj.LastName, DbType.String, ParameterDirection.Input);
+                            var status = await dbConnection?.ExecuteAsync(addCommand, param: dynamicParameter, commandType: CommandType.Text);
 
-                                  return dynamicParameter;
+                            return status;
+                        })
+                        .ResultAsync<int?>();
 
-                              })
-                              ?.SqlCommandAsync<int?>(async (leDbConnection, leDynamicParameter) =>
-                              {
-                                  // Define custom query operation as per your requirement by using dapper IDbConnection list of extension methods.
+                //// Select Data With Parameter
 
-                                  int? result =  
-                                    await
-                                      leDbConnection
-                                      ?.ExecuteAsync("uspAddUsers", param: leDynamicParameter, commandType: CommandType.StoredProcedure);
+                productModel.ProductId = 1;
 
-                                  return result;
+                var result =
+                        await
+                        dapperBuilder
+                        .OpenConnection(new SqlConnection(connectionString))
+                        .Parameter(() =>
+                        {
+                            // Define Sql Parameter by using Dapper DynamicParameter Class
+                            var dynamicParameter = new DynamicParameters();
+                            dynamicParameter.Add("@ProductId", productModel.ProductId, DbType.Decimal, ParameterDirection.Input);
 
-                              })
-                              ?.ResultAsync<int?>(); // Get Result
+                            return dynamicParameter;
+                        })
+                        .Command(async (dbConnection, dynamicParameter) =>
+                         {
+                             // Define custom query operation as per your requirement by using dapper IDbConnection list of extension methods.
 
-                        Console.WriteLine((flag >= 1) ? "Data successfully save." : "something went wrong");
-                       
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        Console.WriteLine(ex.StackTrace);
-                    }
+                             var data =
+                              await
+                                  dbConnection
+                                  ?.QueryFirstAsync<ProductModel>("SELECT * FROM tblProducts WHERE ProductId=@ProductId", param: dynamicParameter, commandType: CommandType.Text);
 
-                }).Wait();
+                             return data;
+                         })
+                        .ResultAsync<ProductModel>(); // Get Result
+
+                // Print result
+                Console.WriteLine($" Name : {result.Name} | Unit Price : {result.UnitPrice}");
+
+                //// Select Data Without Parameter
+                var resultSet =
+                await
+                dapperBuilder
+                .OpenConnection(new SqlConnection(connectionString))
+                .Command(async (dbConnection) =>
+                {
+                    // Define custom query operation as per your requirement by using dapper IDbConnection list of extension methods.
+                    var data =
+                    await
+                    dbConnection
+                    ?.QueryAsync<ProductModel>("SELECT * FROM tblProducts", commandType: CommandType.Text);
+
+                    return data.ToList().AsReadOnly();
+                })
+                .ResultAsync<IReadOnlyCollection<ProductModel>>();
+
+                // Print Result
+                foreach (var model in resultSet)
+                {
+                    Console.WriteLine($" Name : {model.Name} | Unit Price : {model.UnitPrice}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
         }
     }
 }
-
 
 ```
 ### Dapper Api Docs
