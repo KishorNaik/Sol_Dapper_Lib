@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperFluent", "DapperFluent\DapperFluent.csproj", "{FF1C61FE-38D7-4365-BE8F-B2D7F31A23AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DapperFluent", "DapperFluent\DapperFluent.csproj", "{FF1C61FE-38D7-4365-BE8F-B2D7F31A23AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperFluent.Client", "DapperFluent.Client\DapperFluent.Client.csproj", "{B558044D-2EBF-49C0-81F9-2A2CB8FD6398}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DapperFluent.Client", "DapperFluent.Client\DapperFluent.Client.csproj", "{B558044D-2EBF-49C0-81F9-2A2CB8FD6398}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperFluent_Api", "DapperFluent_Api\DapperFluent_Api.csproj", "{9F44A4D1-1D6F-4320-BE06-65E28BC7256F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperFluent_MultipleDbProvider_Api", "DapperFluent_MultipleDbProvider_Api\DapperFluent_MultipleDbProvider_Api.csproj", "{C040E0D1-B728-4C1E-858D-469ADC2A5132}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{B558044D-2EBF-49C0-81F9-2A2CB8FD6398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B558044D-2EBF-49C0-81F9-2A2CB8FD6398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B558044D-2EBF-49C0-81F9-2A2CB8FD6398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F44A4D1-1D6F-4320-BE06-65E28BC7256F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F44A4D1-1D6F-4320-BE06-65E28BC7256F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F44A4D1-1D6F-4320-BE06-65E28BC7256F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F44A4D1-1D6F-4320-BE06-65E28BC7256F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C040E0D1-B728-4C1E-858D-469ADC2A5132}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C040E0D1-B728-4C1E-858D-469ADC2A5132}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C040E0D1-B728-4C1E-858D-469ADC2A5132}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C040E0D1-B728-4C1E-858D-469ADC2A5132}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

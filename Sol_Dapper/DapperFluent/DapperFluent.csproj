@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Kishor Naik</Authors>
-    <PackageProjectUrl>https://github.com/KishorNaik/Sol_Dapper_Lib</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/KishorNaik/Sol_Dapper_Lib</RepositoryUrl>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Kishor Naik</Authors>
+		<PackageProjectUrl>https://github.com/KishorNaik/Sol_Dapper_Lib</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/KishorNaik/Sol_Dapper_Lib</RepositoryUrl>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.30" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.0.35" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8" />
+	</ItemGroup>
 </Project>

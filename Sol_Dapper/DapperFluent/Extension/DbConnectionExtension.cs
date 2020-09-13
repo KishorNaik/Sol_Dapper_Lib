@@ -8,49 +8,36 @@ namespace DapperFluent.Extension
 {
     public static class DbConnectionExtension
     {
-        public static async Task OpenConnectionAsync(this IDbConnection dbConnection)
+        public static void OpenConnection(this IDbConnection dbConnection)
         {
-            
-                await Task.Run(() =>
+            try
+            {
+                if (dbConnection?.State == ConnectionState.Closed || dbConnection?.State == ConnectionState.Broken)
                 {
-                    try
-                    {
-                        if (dbConnection?.State == ConnectionState.Closed || dbConnection?.State == ConnectionState.Broken)
-                        {
-                            dbConnection?.Open();
-                        }
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-                });
-          
+                    dbConnection?.Open();
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
 
-        public static async Task CloseConnectionAsync(this IDbConnection dbConnection)
+        public static void CloseConnection(this IDbConnection dbConnection)
         {
-            
-                await Task.Run(() => {
-
-                    try
-                    {
-                        if (dbConnection?.State == ConnectionState.Open)
-                        {
-                            dbConnection?.Close();
-                            dbConnection.Dispose();
-                            dbConnection = null;
-                        }
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-
-                    
-
-                });
-           
+            try
+            {
+                if (dbConnection?.State == ConnectionState.Open)
+                {
+                    dbConnection?.Close();
+                    dbConnection.Dispose();
+                    dbConnection = null;
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

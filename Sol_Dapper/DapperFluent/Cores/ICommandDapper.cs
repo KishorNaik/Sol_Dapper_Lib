@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DapperFluent.FluentInterface
+namespace DapperFluent.Cores
 {
-    public interface ISqlCommandDapper
+    public interface ICommandDapper
     {
         Task<T> ResultAsync<T>();
     }
