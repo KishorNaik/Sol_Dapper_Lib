@@ -13,7 +13,7 @@ PM> Install-Package DapperFluent -Version 1.0.1
 > dotnet add package DapperFluent --version 1.0.1
 ```
 
-### Usage.
+## Using Console Application.
 
 ### Make model class
 ```C#
