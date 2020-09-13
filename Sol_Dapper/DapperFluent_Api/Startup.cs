@@ -29,7 +29,7 @@ namespace DapperFluent_Api
         {
             services.AddControllers();
 
-            services.AddDapperFluent(new SqlConnection(@"Data Source=DESKTOP-EJ69NN3\SHREE;Initial Catalog=DapperDemo;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+            services.AddDapperFluent(new SqlConnection("ConnectionString"));
 
             services.AddTransient<IProductRepository, ProductRepository>();
         }

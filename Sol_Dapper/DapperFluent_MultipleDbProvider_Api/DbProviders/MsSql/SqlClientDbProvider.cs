@@ -20,7 +20,7 @@ namespace DapperFluent_MultipleDbProvider_Api.DbProviders.MsSql
 
         SqlConnection IDbProviders<SqlConnection>.GetConnection()
         {
-            return new SqlConnection(@"Data Source=DESKTOP-EJ69NN3\SHREE;Initial Catalog=DapperDemo;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            return new SqlConnection(@"ConnectionString");
         }
     }
 }
