@@ -391,6 +391,54 @@ public sealed class SqlClientDbProvider : ISqlClientDbProvider
 ```
 Implement **IDbProviders** interface by passing db client as generic type. If we want to use MySql or Oracle db client then define respective db client as generic type but make sure that it would create a new inteface and class for different db providers.
 
+Like example:
+* MySql
+```C#
+public interface IMySqlClientDbProvider : IDbProviders<MySqlConnection>
+{
+}
+
+public sealed class MySqlClientDbProvider : IMySqlClientDbProvider
+{
+    private readonly IDapperBuilder dapperBuilder = null;
+
+    public SqlClientDbProvider(IDapperBuilder dapperBuilder)
+    {
+        this.dapperBuilder = dapperBuilder;
+    }
+
+    IDapperBuilder IDbProviders<MySqlConnection>.DapperBuilder => dapperBuilder;
+
+    MySqlConnection IDbProviders<MySqlConnection>.GetConnection()
+    {
+        return new MySqlConnection(@"ConnectionString");
+    }
+}
+```
+* Oracle
+```C#
+public interface IOracleClientDbProvider : IDbProviders<OracleConnection>
+{
+}
+
+public sealed class OracleClientDbProvider : IOracleClientDbProvider
+{
+    private readonly IDapperBuilder dapperBuilder = null;
+
+    public SqlClientDbProvider(IDapperBuilder dapperBuilder)
+    {
+        this.dapperBuilder = dapperBuilder;
+    }
+
+    IDapperBuilder IDbProviders<OracleConnection>.DapperBuilder => dapperBuilder;
+
+    MySqlConnection IDbProviders<OracleConnection>.GetConnection()
+    {
+        return new OracleConnection(@"ConnectionString");
+    }
+}
+```
+
 
 #### Step 4
 Define a IProductRepository interface and ProductRepository class and inject **ISqlClientDbProvider** interface on a repository constructor.
