@@ -330,7 +330,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddTransient<IProductRepository, ProductRepository>();
 }
 ```
-Demo : https://github.com/KishorNaik/Sol_Dapper_Lib/tree/master/Sol_Dapper/DapperFluent_Api
+Source Code : https://github.com/KishorNaik/Sol_Dapper_Lib/tree/master/Sol_Dapper/DapperFluent_Api
 
 ## Using Asp.net core web api or MVC project template(Core 3.1). 
 ### Note : If you want to work on a multiple database provider such as Ms-Sql and My-Sql and Oracle on same api project solution then use the following code
@@ -365,7 +365,7 @@ public class ProductModel
     public Decimal? UnitPrice { get; set; }
 }
 ```
-### Step 3
+#### Step 3
 Define multiple client db provider class. In this demo, i am going to use **SqlConnection** client provider.
 ```C#
 public interface ISqlClientDbProvider : IDbProviders<SqlConnection>
@@ -539,7 +539,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddTransient<IProductRepository, ProductRepository>();
 }
 ```
-Demo : https://github.com/KishorNaik/Sol_Dapper_Lib/tree/master/Sol_Dapper/DapperFluent_MultipleDbProvider_Api
+Source Code : https://github.com/KishorNaik/Sol_Dapper_Lib/tree/master/Sol_Dapper/DapperFluent_MultipleDbProvider_Api
 
 
 ### Dapper Api Docs
