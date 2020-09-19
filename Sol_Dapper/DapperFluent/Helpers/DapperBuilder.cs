@@ -49,9 +49,9 @@ namespace DapperFluent
         {
             try
             {
-                this._dbConnection.OpenConnection();
-
                 this._dbConnection = dbConnection;
+
+                this._dbConnection.OpenConnection();
             }
             catch
             {
