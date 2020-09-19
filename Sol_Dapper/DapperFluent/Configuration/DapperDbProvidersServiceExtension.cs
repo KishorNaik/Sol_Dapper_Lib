@@ -13,22 +13,5 @@ namespace DapperFluent.Configuration
         {
             service.AddTransient<IDapperBuilder, DapperBuilder>();
         }
-
-        private static String ConnectionString { get; set; }
-
-        public static void AddDapperFluent(this IServiceCollection service, IDbConnection dbConnection)
-        {
-            service.AddTransient<IDapperBuilder, DapperBuilder>((config) =>
-            {
-                ConnectionString = ConnectionString ?? dbConnection?.ConnectionString;
-
-                if (dbConnection != null)
-                {
-                    dbConnection.ConnectionString = ConnectionString;
-                }
-
-                return new DapperBuilder(dbConnection);
-            });
-        }
     }
 }

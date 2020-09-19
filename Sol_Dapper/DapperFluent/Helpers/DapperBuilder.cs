@@ -20,30 +20,7 @@ namespace DapperFluent
 
         #endregion Declaration
 
-        public DapperBuilder()
-        {
-        }
-
-        public DapperBuilder(IDbConnection dbConnection)
-        {
-            this._dbConnection = dbConnection;
-        }
-
         #region Public Method
-
-        IConnectionDapper IDapper.OpenConnection()
-        {
-            try
-            {
-                this._dbConnection.OpenConnection();
-            }
-            catch
-            {
-                throw;
-            }
-
-            return this;
-        }
 
         IConnectionDapper IDapper.OpenConnection(IDbConnection dbConnection)
         {

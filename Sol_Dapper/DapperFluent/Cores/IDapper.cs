@@ -7,8 +7,6 @@ namespace DapperFluent.Cores
 {
     public interface IDapper
     {
-        IConnectionDapper OpenConnection();
-
         IConnectionDapper OpenConnection(IDbConnection dbConnection);
     }
 }
