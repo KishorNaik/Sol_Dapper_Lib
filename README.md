@@ -1,16 +1,16 @@
 # Simple Dapper Fluent Api
-[![Generic badge](https://img.shields.io/badge/Nuget-1.0.1-<COLOR>.svg)](https://www.nuget.org/packages/DapperFluent/1.0.1)
+[![Generic badge](https://img.shields.io/badge/Nuget-1.0.2-<COLOR>.svg)](https://www.nuget.org/packages/DapperFluent/1.0.2)
 
 ## Simple fluent api by using existing dapper's api.
 
 ### Using Nuget Package Manger:
 ```
-PM> Install-Package DapperFluent -Version 1.0.1
+PM> Install-Package DapperFluent -Version 1.0.2
 ```
 
 ### Using .Net CLI:
 ```
-> dotnet add package DapperFluent --version 1.0.1
+> dotnet add package DapperFluent --version 1.0.2
 ```
 
 ## Using Console Application.
